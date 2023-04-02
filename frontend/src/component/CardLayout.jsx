@@ -9,7 +9,7 @@ const CardLayout = ({ name, email, phone, website, username, handleDeleteUserByE
      const [openModal, setOpenModal] = useState(false);
      return (
           <>
-               <Card w="xs" m={3}>
+               <Card w="xs">
                     <CardBody bg={"blackAlpha.100"} p={0}>
                          <Image m={"auto"} maxW={"50%"} src={`https://avatars.dicebear.com/v2/avataaars/${username}.svg`} alt="user avatar" borderRadius="lg" />
                     </CardBody>

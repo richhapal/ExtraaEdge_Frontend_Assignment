@@ -1,4 +1,4 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, HStack } from "@chakra-ui/react";
 import React, { useEffect, useRef } from "react";
 import CardLayout from "./CardLayout";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,7 +23,7 @@ const Home = () => {
 
      return (
           <>
-               <Box>
+               <Box mt={3}>
                     {!userList.length ? (
                          <Box className="spinner">
                               <div className="bounce1"></div>
@@ -31,7 +31,7 @@ const Home = () => {
                               <div className="bounce3"></div>
                          </Box>
                     ) : (
-                         <Flex flexWrap="wrap">
+                         <Flex flexWrap="wrap" gap={3} justifyContent="center">
                               {userList.map((item) => (
                                    <CardLayout key={item.email} {...item} handleDeleteUserByEmail={handleDeleteUserByEmail} />
                               ))}
