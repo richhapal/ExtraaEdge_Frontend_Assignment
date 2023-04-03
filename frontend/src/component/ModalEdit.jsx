@@ -1,6 +1,7 @@
 import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import validator from "validator";
 import { userActions } from "../redux/userSlice";
 const ModalEdit = ({ isOpen, onOpen, onClose, setOpenModal, userData }) => {
      const initialRef = React.useRef(null);
@@ -23,10 +24,20 @@ const ModalEdit = ({ isOpen, onOpen, onClose, setOpenModal, userData }) => {
 
      const handleUserFormEdit = () => {
           //   console.log("--------", userList);
-          let editList = userList.map((items, index) => (items.email === userData.email ? { ...items, name, email, phone, website } : items));
-          dispatch(userActions.updateUserList(editList));
-          onClose();
-          setOpenModal(false);
+          let validName = validator.isLength(name, { min: 3 });
+          let validEmail = validator.isEmail(email);
+          let validWebsite = validator.isEmail(website);
+          let validPhone = validator.isEmail(phone);
+          if (!validName) {
+               alert("Name should be atleast length 3 ");
+          } else if (!validEmail) {
+               alert("Please enter a valid email");
+          } else {
+               let editList = userList.map((items, index) => (items.email === userData.email ? { ...items, name, email, phone, website } : items));
+               dispatch(userActions.updateUserList(editList));
+               onClose();
+               setOpenModal(false);
+          }
      };
 
      return (
